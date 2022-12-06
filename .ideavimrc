@@ -1,1 +1,2 @@
-/Users/samuel/.ideavimrc
+# share vim yank to system clipboard
+set clipboard+=unnamed
