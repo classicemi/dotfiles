@@ -102,7 +102,6 @@ source $ZSH/oh-my-zsh.sh
 
 alias py="python3"
 alias vi="nvim"
-alias vim="nvim"
 
 # Set Proxy
 function proxy() {
