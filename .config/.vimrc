@@ -28,7 +28,7 @@ set guifont=DejaVu\ Sans:s12
 set mouse=a
 set ignorecase
 set belloff=all
-set foldmethod=indent
+set foldmethod=manual
 
 
 nmap <leader>n :NERDTreeFocus<CR>
@@ -83,7 +83,7 @@ let mapleader = ","
 let g:mapleader = ","
 
 
-source ~/matchit/plugin/matchit.vim
+" source ~/matchit/plugin/matchit.vim
 
 set number
 
