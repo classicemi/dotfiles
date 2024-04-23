@@ -30,6 +30,15 @@ set ignorecase
 set belloff=all
 set foldmethod=manual
 
+" =======
+" Keymaps
+" =======
+
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
 
 nmap <leader>n :NERDTreeFocus<CR>
 nmap <C-n> :NERDTreeToggle<CR>
@@ -162,6 +171,7 @@ let g:coc_global_extensions = [
   \ 'coc-html',
   \ 'coc-clangd',
   \ 'coc-java',
+  \ 'coc-pyright',
   \ ]
 " from readme
 " if hidden is not set, TextEdit might fail.
