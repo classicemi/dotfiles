@@ -103,7 +103,9 @@ source $ZSH/oh-my-zsh.sh
 
 alias py="python3"
 alias nvi="nvim"
-alias vi="vim"
+alias vi="nvim"
+# httpstat
+alias hs="httpstat"
 
 # Set Proxy
 function proxy() {
