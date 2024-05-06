@@ -111,15 +111,22 @@ alias hs="httpstat"
 function proxy() {
     export {http,https,ftp}_proxy="127.0.0.1:7890"
     export {HTTP,HTTPS,FTP}_PROXY="127.0.0.1:7890"
+    export GO111MODULE=on
+    export GOPROXY=https://goproxy.cn
+    export ELECTRON_GET_USE_PROXY=true
+    export GLOBAL_AGENT_HTTP_PROXY=http://127.0.0.1:7890
+    export GLOBAL_AGENT_HTTPS_PROXY=http://127.0.0.1:7890
 }
 
 # Unset Proxy
 function noproxy() {
     unset {http,https,ftp}_proxy
     unset {HTTP,HTTPS,FTP}_PROXY
-    export ELECTRON_GET_USE_PROXY=true
-    export GLOBAL_AGENT_HTTP_PROXY=http://127.0.0.1:7890
-    export GLOBAL_AGENT_HTTPS_PROXY=http://127.0.0.1:7890
+    unset GO111MODULE
+    unset GOPROXY
+    export ELECTRON_GET_USE_PROXY
+    export GLOBAL_AGENT_HTTP_PROXY
+    export GLOBAL_AGENT_HTTPS_PROXY
 }
 
 export NVM_DIR="$HOME/.nvm"
