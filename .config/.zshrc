@@ -135,3 +135,6 @@ export NVM_DIR="$HOME/.nvm"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH=$HOME/.local/bin:$PATH
+
+eval "$(oh-my-posh init zsh)"
+
