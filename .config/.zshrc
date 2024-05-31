@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 export PATH=/Users/sammy/Library/Python/3.9/bin:$PATH
 
@@ -102,6 +109,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias py="python3"
+alias pip="py /Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages/pip/__main__.py"
 alias nvi="nvim"
 alias vi="nvim"
 # httpstat
@@ -136,5 +144,9 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH=$HOME/.local/bin:$PATH
 
-eval "$(oh-my-posh init zsh)"
+# THEME
+# eval "$(oh-my-posh init zsh)"
+source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
