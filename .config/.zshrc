@@ -76,6 +76,9 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 alias ls="ls --color"
 alias vi="nvim"
 alias hs="httpstat"
+alias python="python3"
+
+alias rp="cd ~/workspace/play/react-playground"
 
 # Shell integrations
 eval "$(fzf --zsh)"
@@ -102,9 +105,26 @@ function noproxy() {
     export GLOBAL_AGENT_HTTPS_PROXY
 }
 
+# nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# nvm end
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH=$HOME/.local/bin:$PATH
+
+NVIM_BEGINNER=~/.config/nvim-beginner
+export NVIM_BEGINNER
+alias nvb='XDG_DATA_HOME=$NVIM_BEGINNER/share XDG_CONFIG_HOME=$NVIM_BEGINNER nvim'
+
+# pnpm
+export PNPM_HOME="/Users/bytedance/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# Added by Windsurf
+export PATH="/Users/bytedance/.codeium/windsurf/bin:$PATH"
