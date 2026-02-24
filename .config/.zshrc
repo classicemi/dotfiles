@@ -5,21 +5,17 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Ghostty's shell integration overrides cursor style to bar (beam) via zle-line-init.
+# Remove 'cursor' from GHOSTTY_SHELL_FEATURES so the integration skips cursor handling,
+# preserving the block cursor set in ghostty config.
+GHOSTTY_SHELL_FEATURES="${GHOSTTY_SHELL_FEATURES/cursor,/}"
+GHOSTTY_SHELL_FEATURES="${GHOSTTY_SHELL_FEATURES/,cursor/}"
+GHOSTTY_SHELL_FEATURES="${GHOSTTY_SHELL_FEATURES/cursor/}"
+
 # If you come from bash you might have to change your $PATH.
 eval "$(/opt/homebrew/bin/brew shellenv)"
-export PATH=/Users/sammy/Library/Python/3.9/bin:$PATH
+export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 export PATH=/opt/homebrew/opt/fzf/bin:$PATH
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-source $ZSH/oh-my-zsh.sh
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -36,14 +32,19 @@ source "$ZINIT_HOME/zinit.zsh"
 # Add in Powerlevel10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
-# Add in zsh plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
+# Add in zsh plugins (using turbo mode for faster startup)
+zinit wait lucid for \
+  atinit"zicompinit; zicdreplay" \
+    zsh-users/zsh-syntax-highlighting \
+  blockf atpull'zinit creinstall -q .' \
+    zsh-users/zsh-completions \
+  atload"_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions \
+  Aloxaf/fzf-tab
 
-# Load completions
-autoload -U compinit && compinit
+# Load oh-my-zsh libs and plugins
+zinit snippet OMZL::directories.zsh  # .. ... .... cd shortcuts
+zinit snippet OMZP::common-aliases   # ll la l etc.
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -76,7 +77,6 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 alias ls="ls --color"
 alias vi="nvim"
 alias hs="httpstat"
-alias python="python3"
 
 alias rp="cd ~/workspace/play/react-playground"
 
@@ -107,11 +107,11 @@ function noproxy() {
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+nvm use default --silent
 # nvm end
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH=$HOME/.local/bin:$PATH
 
 NVIM_BEGINNER=~/.config/nvim-beginner
@@ -128,3 +128,9 @@ esac
 
 # Added by Windsurf
 export PATH="/Users/bytedance/.codeium/windsurf/bin:$PATH"
+
+# cargo
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# Added by Antigravity
+export PATH="/Users/bytedance/.antigravity/antigravity/bin:$PATH"
